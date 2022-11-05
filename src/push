@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+info() {
+    echo "============================================================================"
+    echo "[INFO] - $1"
+    echo "============================================================================"
+}
+
+error() {
+    echo "============================================================================"
+    echo "[ERROR] - $1"
+    echo "============================================================================"
+}
+
+warning() {
+    echo "============================================================================"
+    echo "[WARNING] - $1"
+    echo "============================================================================"
+}
+
+info "Pulling from origin"
+git pull
+
+info "Getting the commit message"
+commitMessage=${1?Error: No commit message given};
+
+info "Staging all files"
+git add .
+
+info "Creating feature-branch"
+git branch -M feature-branch
+
+info "Committing with the given commit message"
+git commit -m "$commitMessage"
+
+info "Pushing to feature-branch"
+git push origin feature-branch
+
+info "Creating a PR with the title and body as commit message"
+gh pr create --title "$commitMessage" --body "$commitMessage"
+
+info "Waiting for 1 second"
+sleep 1 
+
+info "Merging the PR with the branch as feature branch using the default merge"
+gh pr merge feature-branch --merge 
+
+info "Checking out main branch"
+git checkout main
+
+info "Deleting feature branch"
+git branch -D feature-branch || echo 'Feature branch already deleted'
+
+info "Pulling from origin"
+git pull
