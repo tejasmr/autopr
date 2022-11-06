@@ -10,3 +10,9 @@ Automatically stages and commits the code, creates and approves PRs
 
 ## Requirements
 
+1. Install git
+2. Config git
+3. Install github cli (gh)
+4. Login to github using `gh auth login`
+5. Setup git repository and open folder in vscode
+6. Make changes and use the Auto PR extension!
