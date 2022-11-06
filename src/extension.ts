@@ -13,7 +13,7 @@ async function sh(cmd: string) {
 	});
 }
 
-const EXTENSION_ID: string = 'undefined_publisher.autopr';
+const EXTENSION_ID: string = 'tejasmr.autopr';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('autopr.autopr', () => {
