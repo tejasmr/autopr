@@ -1,7 +1,7 @@
 {
   "name": "autopr",
   "displayName": "autopr",
-  "description": "Automatically creates commits the code, creates and approves PRs",
+  "description": "Automatically stages and commits the code, creates and approves PRs",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.73.0"
