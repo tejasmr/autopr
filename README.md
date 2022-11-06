@@ -1,6 +1,9 @@
-# autopr README
+# autopr 
+
+[![Marketplace](https://vsmarketplacebadge.apphb.com/version/tejasmr.autopr.svg)](https://marketplace.visualstudio.com/items?itemName=tejasmr.autopr) 
 
 Automatically stages and commits the code, creates and approves PRs
+
 ## Usage
 
 1. Open Command Palette (Ctrl + Shift + P or Cmd + Shift + P)
