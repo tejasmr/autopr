@@ -10,14 +10,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:autopr.helloWorld"
+    "onCommand:autopr.autopr"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "autopr.helloWorld",
-        "title": "Hello World"
+        "command": "autopr.autopr",
+        "title": "Auto PR"
       }
     ]
   },

@@ -18,11 +18,18 @@ warning() {
     echo "============================================================================"
 }
 
-info "Pulling from origin"
-git pull
+
+info "Getting path"
+path=${1?Error: Path not provided}
 
 info "Getting the commit message"
-commitMessage=${1?Error: No commit message given};
+commitMessage=${2?Error: No commit message given};
+
+info "Cding into provided path"
+cd "$path"
+
+info "Pulling from origin"
+git pull
 
 info "Staging all files"
 git add .

@@ -9,16 +9,18 @@ import { exec } from 'child_process';
  * @return {Object} { stdout: String, stderr: String }
  */
 async function sh(cmd: string) {
-  return new Promise(function (resolve, reject) {
-    exec(cmd, (err, stdout, stderr) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ stdout, stderr });
-      }
-    });
-  });
+	return new Promise(function (resolve, reject) {
+		exec(cmd, (err, stdout, stderr) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve({ stdout, stderr });
+			}
+		});
+	});
 }
+
+const EXTENSION_ID: string = 'undefined_publisher.autopr';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -31,15 +33,21 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('autopr.run', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from autopr!');
+	let disposable = vscode.commands.registerCommand('autopr.autopr', () => {
+		let folders: readonly vscode.WorkspaceFolder[] | undefined = vscode.workspace.workspaceFolders;
+		if (!folders) { 
+			return; 
+		}
+		let path = vscode.extensions.getExtension(EXTENSION_ID)?.extensionPath;
+		let workspacePath = folders[0].uri.path;
+		const getCommand = (value: string|undefined) => 'sh ' + path + '/src/push ' + '"' + (workspacePath) + '" "' + (value ?? 'Adding') + '"';
 		vscode.window.showInputBox({
 			"placeHolder": "Adding",
 			"title": "Enter commit message"
-		}).then(async (value) => {
-			await sh('./push "' + (value ?? 'Adding') + '"');
+		}).then((value) => {
+			sh(getCommand(value)).then((value) => {
+				console.log(value);
+			});
 		});
 	});
 
@@ -47,4 +55,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
