@@ -43,11 +43,10 @@ export function activate(context: vscode.ExtensionContext) {
 			sh(getCommand(value)).then((value) => {
 				console.log("Successfully ran the script");
 				console.log(value);
+				console.log("Showing the user the notification");
+				vscode.window.showInformationMessage("Successfully completed autopr! Cheers!");
 			});
 		});
-
-		console.log("Showing the user the notification");
-		vscode.window.showInformationMessage("Successfully completed autopr! Cheers!");
 	});
 
 	context.subscriptions.push(disposable);
