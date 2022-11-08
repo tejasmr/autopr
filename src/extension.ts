@@ -45,6 +45,9 @@ export function activate(context: vscode.ExtensionContext) {
 				console.log(value);
 			});
 		});
+
+		console.log("Showing the user the notification");
+		vscode.window.showInformationMessage("Successfully completed autopr! Cheers!");
 	});
 
 	context.subscriptions.push(disposable);
